@@ -1,0 +1,62 @@
+{
+	"name": "@emailfig/n8n-nodes-emailfig",
+	"version": "1.0.0",
+	"description": "EmailFig nodes for n8n: manage contacts, lists and tags, and trigger workflows on contact, form and campaign events",
+	"license": "MIT",
+	"homepage": "https://emailfig.com/help/api/n8n",
+	"keywords": [
+		"n8n-community-node-package",
+		"emailfig",
+		"email marketing",
+		"newsletter"
+	],
+	"author": {
+		"name": "EmailFig",
+		"email": "support@emailfig.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/EmailFig/n8n-nodes-emailfig.git"
+	},
+	"bugs": {
+		"url": "https://github.com/EmailFig/n8n-nodes-emailfig/issues"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"release": "n8n-node release",
+		"test": "vitest run",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [
+			"dist/credentials/EmailFigApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/EmailFig/EmailFig.node.js",
+			"dist/nodes/EmailFig/EmailFigTrigger.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "0.48.2",
+		"@types/node": "22.20.4",
+		"eslint": "9.39.4",
+		"n8n-workflow": "2.39.2",
+		"prettier": "3.6.2",
+		"typescript": "5.9.3",
+		"vitest": "3.2.4"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}

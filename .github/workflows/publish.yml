@@ -1,0 +1,29 @@
+# n8n verifies only community nodes published from GitHub Actions with npm provenance.
+name: Publish
+
+on:
+  push:
+    tags: ['*.*.*']
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          # npm trusted publishing needs npm 11.5.1 or later, which Node 24 ships.
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      # In CI, n8n-node release lints, builds and publishes with provenance.
+      # NPM_TOKEN is only for a package npm won't yet trust by OIDC.
+      - run: |
+          [ -n "$NPM_TOKEN" ] && npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+          npm run release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

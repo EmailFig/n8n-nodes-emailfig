@@ -1,0 +1,58 @@
+{
+	"getAccount": { "method": "GET", "path": "/account" },
+	"listContacts": {
+		"method": "GET",
+		"path": "/contacts",
+		"query": ["email", "list_id", "tag", "updated_since", "include_deleted", "cursor", "per_page"]
+	},
+	"getContact": { "method": "GET", "path": "/contacts/{id}" },
+	"upsertContact": {
+		"method": "POST",
+		"path": "/contacts",
+		"body": ["email_address", "first_name", "last_name", "properties", "tags"]
+	},
+	"updateContact": {
+		"method": "PATCH",
+		"path": "/contacts/{id}",
+		"body": ["email_address", "first_name", "last_name", "properties"]
+	},
+	"eraseContact": { "method": "DELETE", "path": "/contacts/{id}" },
+	"unsubscribeAddress": {
+		"method": "POST",
+		"path": "/contacts/unsubscribe",
+		"body": ["email_address"]
+	},
+	"addTags": { "method": "POST", "path": "/contacts/{contact_id}/tags", "body": ["tags"] },
+	"removeTags": { "method": "DELETE", "path": "/contacts/{contact_id}/tags", "body": ["tags"] },
+	"listLists": { "method": "GET", "path": "/lists" },
+	"getList": { "method": "GET", "path": "/lists/{id}" },
+	"joinList": {
+		"method": "POST",
+		"path": "/lists/{list_id}/contacts",
+		"body": [
+			"email_address",
+			"first_name",
+			"last_name",
+			"properties",
+			"tags",
+			"consent.ip",
+			"consent.at"
+		]
+	},
+	"leaveList": { "method": "DELETE", "path": "/lists/{list_id}/contacts/{contact_id}" },
+	"listTags": { "method": "GET", "path": "/tags", "query": ["cursor", "per_page"] },
+	"listCustomFields": { "method": "GET", "path": "/custom_fields" },
+	"listForms": { "method": "GET", "path": "/forms" },
+	"listWebhooks": { "method": "GET", "path": "/webhooks" },
+	"createWebhook": {
+		"method": "POST",
+		"path": "/webhooks",
+		"body": ["url", "event_types", "description"]
+	},
+	"updateWebhook": {
+		"method": "PATCH",
+		"path": "/webhooks/{id}",
+		"body": ["event_types", "description", "enabled"]
+	},
+	"deleteWebhook": { "method": "DELETE", "path": "/webhooks/{id}" }
+}

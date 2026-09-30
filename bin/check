@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Everything the node has to pass before a release.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+npm ci --no-audit --no-fund --ignore-scripts
+
+# .npmrc keeps registry URLs out of the lockfile, so installs use whatever
+# registry is configured; this catches a lockfile made without it.
+if grep -q '"resolved"' package-lock.json; then
+  echo "package-lock.json records registry URLs. Regenerate it here, where .npmrc applies." >&2
+  exit 1
+fi
+
+npm run lint
+npm run build
+npm test

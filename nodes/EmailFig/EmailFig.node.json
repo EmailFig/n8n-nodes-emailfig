@@ -1,0 +1,10 @@
+{
+	"node": "@emailfig/n8n-nodes-emailfig.emailFig",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Marketing & Content", "Communication"],
+	"resources": {
+		"credentialDocumentation": [{ "url": "https://emailfig.com/help/api/n8n" }],
+		"primaryDocumentation": [{ "url": "https://emailfig.com/help/api/n8n" }]
+	}
+}
